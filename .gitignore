@@ -1,5 +1,6 @@
 # Object files
 *.o
+*.orig
 
 # The binary
 dwm
