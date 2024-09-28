@@ -1,0 +1,70 @@
+From 4b5d69a8ab1c04570ba497378c1ee14b0ed4457f Mon Sep 17 00:00:00 2001
+From: David Burian <david.burian@me.com>
+Date: Sat, 28 Sep 2024 19:19:23 +0200
+Subject: [PATCH] add gaps
+
+---
+ config.def.h |  2 ++
+ dwm.c        | 20 +++++++++++---------
+ 2 files changed, 13 insertions(+), 9 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index 27769ba..aa7453e 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -2,6 +2,8 @@
+ 
+ /* appearance */
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
++static const unsigned int gappx     = 1;        /* gap pixel between windows */
++static const unsigned int gappx     = 1;        /* gap pixel between windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
+ static const char panel[][20]       = { "xfce4-panel", "Xfce4-panel" }; /* name & cls of panel win */
+ static const int showbar            = 1;        /* 0 means no bar */
+diff --git a/dwm.c b/dwm.c
+index 09296c5..6cee6a2 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -1730,7 +1730,7 @@ tagmon(const Arg *arg)
+ void
+ tile(Monitor *m)
+ {
+-	unsigned int i, n, h, mw, my, ty;
++	unsigned int i, n, h, r, g = 0, mw, my, ty;
+ 	Client *c;
+ 
+ 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+@@ -1738,20 +1738,22 @@ tile(Monitor *m)
+ 		return;
+ 
+ 	if (n > m->nmaster)
+-		mw = m->nmaster ? m->ww * m->mfact : 0;
++		mw = m->nmaster ? (m->ww - (g = gappx)) * m->mfact : 0;
+ 	else
+ 		mw = m->ww;
+ 	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+ 		if (i < m->nmaster) {
+-			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
++			r = MIN(n, m->nmaster) - i;
++			h = (m->wh - my - gappx * (r - 1)) / r;
+ 			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
+-			if (my + HEIGHT(c) < m->wh)
+-				my += HEIGHT(c);
++			if (my + HEIGHT(c) + gappx < m->wh)
++				my += HEIGHT(c) + gappx;
+ 		} else {
+-			h = (m->wh - ty) / (n - i);
+-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
+-			if (ty + HEIGHT(c) < m->wh)
+-				ty += HEIGHT(c);
++			r = n - i;
++			h = (m->wh - ty - gappx * (r - 1)) / r;
++			resize(c, m->wx + mw + g, m->wy + ty, m->ww - mw - g - (2*c->bw), h - (2*c->bw), False);
++			if (ty + HEIGHT(c) + gappx < m->wh)
++				ty += HEIGHT(c) + gappx;
+ 		}
+ }
+ 
+-- 
+2.46.1
+
