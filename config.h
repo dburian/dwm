@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 2;        /* gap pixel between windows */
+static const unsigned int gappx     = 0;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const char panel[][20]       = { "xfce4-panel", "Xfce4-panel" }; /* name & cls of panel win */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -32,7 +32,7 @@ static const Rule rules[] = {
 	 */
 	/* class                  instance    title         tags mask     isfloating   monitor */
 	{ "Gimp",                 NULL,       NULL,         0,            1,           -1 },
-  { "Xfce4-panel",          NULL,       NULL,         (1 << 9) - 1, 0,           -1 },
+  { panel[1],               NULL,       NULL,         (1 << 9) - 1, 0,           -1 },
   { NULL,                   NULL,       "Bitwarden",  0,            1,           -1 },
   { NULL,                   NULL,       "Sign in - Google Accounts - Brave",  0,            1,           -1 },
   { NULL,                   NULL,       "Bluetooth Devices",  0,            1,           -1 },
@@ -88,10 +88,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_e,  focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_w, focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_e,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_w, tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
