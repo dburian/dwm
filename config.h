@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 2;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const char panel[][20]       = { "xfce4-panel", "Xfce4-panel" }; /* name & cls of panel win */
@@ -15,10 +15,11 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_white_bg[]    = "#999999";
 static const char col_cyan[]        = "#005577";
+static const char col_yellow[]        = "#ffc978";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_gray1, col_gray2  },
+	[SchemeSel]  = { col_gray4, col_gray1, col_yellow },
 };
 
 /* tagging */
@@ -29,9 +30,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class                  instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",                 NULL,       NULL,       0,            1,           -1 },
-  { "Xfce4-panel",          NULL,       NULL,       (1 << 9) - 1, 0,           -1 },
+	/* class                  instance    title         tags mask     isfloating   monitor */
+	{ "Gimp",                 NULL,       NULL,         0,            1,           -1 },
+  { "Xfce4-panel",          NULL,       NULL,         (1 << 9) - 1, 0,           -1 },
+  { NULL,                   NULL,       "Bitwarden",  0,            1,           -1 },
+  { NULL,                   NULL,       "Sign in - Google Accounts - Brave",  0,            1,           -1 },
+  { NULL,                   NULL,       "Bluetooth Devices",  0,            1,           -1 },
 };
 
 /* layout(s) */
