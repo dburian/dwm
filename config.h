@@ -32,7 +32,7 @@ static const Rule rules[] = {
 	 */
 	/* class                  instance    title         tags mask     isfloating   monitor */
 	{ "Gimp",                 NULL,       NULL,         0,            1,           -1 },
-  { panel[1],               NULL,       NULL,         (1 << 9) - 1, 0,           -1 },
+  { panel[1],               NULL,       NULL,         (1 << 9) - 1, 0,           0 },
   { NULL,                   NULL,       "Bitwarden",  0,            1,           -1 },
   { NULL,                   NULL,       "Sign in - Google Accounts - Brave",  0,            1,           -1 },
   { NULL,                   NULL,       "Bluetooth Devices",  0,            1,           -1 },
